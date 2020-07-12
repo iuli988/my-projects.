@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+    
+{% block  head%}
+<title>Stack Underflow</title>
+{% endblock  %}
+      
+{% block body %}
+<div class="mt-5 container jumbotron" class="wrapper">
+    <h4>Questions</h4>
+    <br>
+    <form action="/" method="POST">
+        <label for="sort">Choose how you want to order by:</label>
+        <select name="selected_order" onchange=" this.form.submit(); ">
+            <option value="title" {{ 'selected' if selected == "title" else '' }} >Title</option>
+            <option value="message" {{ 'selected' if selected == "message" else '' }} >Message</option>
+            <option value="vote_number" {{ 'selected' if selected == "vote_number" else '' }} >Vote number</option>
+            <option value="submission_time" {{ 'selected' if selected == "submission_time" else '' }} >Submission time</option>
+            <option value="view_number" {{ 'selected' if selected == "view_number" else '' }} >View number</option>
+        </select> 
+    </form>
+    {% for question in questions %}
+            <br>
+            <div class="card">
+                <div class="card-body">
+                    <hr>
+                    <h5 class="card-title">{{question.title}}</h5>
+                    <p class="card-text">{{question.message}}</p>
+                    <hr>
+                    <br>
+                    <a href="/respond-question/{{question.id}}" type="button"
+                        class="btn btn-dark">Respond</a>
+                    <p><small>{{question.answers | length}} Answers</small></p>
+                </div>
+            </div>
+            <br>
+    {% endfor %}
+    <a href="ask_question" type="button" class="btn btn-dark">Ask a question</a>
+<a href="registration" type="button" class="btn btn-dark">Registration</a>
+    <a href="login" type="button" class="btn btn-dark">Login</a>
+</div>
+{% endblock  %}

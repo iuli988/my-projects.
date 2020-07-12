@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block  head%}
+<title>Search</title>
+{% endblock  %}
+
+{% block body %}
+<div class="mt-5 container jumbotron">
+    <div class="container">
+        <div class="card" style="width:100%">
+            <div class="card-body">
+                <div id="title" class="float-left">
+                    {% for result in results %}
+                        <h5 class="card-title">{{result.title}}</h5>
+                        <br>
+                        <p class="card-text">{{result.message}}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

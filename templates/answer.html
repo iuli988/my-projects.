@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Answer</title>
+{% endblock  %}
+
+{% block body %}
+<div class="mt-5 container jumbotron">
+    <div class="container">
+        <h2>Question: </h2>
+        <div class="card" style="width:100%">
+            <div class="card-body">
+                <div id="title" class="float-left">
+                    {% for question in question %}
+                        <h5 class="card-title">{{question.title}}</h5>
+                        <br>
+                        <p class="card-text">{{question.message}}</p>
+                        <a href="" class="btn btn-dark btn-sm ">Like</a>
+                        <a href="" class="btn btn-dark btn-sm ">Dislike</a>
+                    {% endfor %}
+                </div>
+                <br>
+                <hr>
+
+            </div>
+        </div>
+        <br>
+    </div>
+    <div class="container">
+        <h4>Answers: </h4>
+        {% for answer in answers %}
+        <hr>
+        <p>Answer {{answer.id}}</p>
+        <p class="card-text">{{answer.message}}</p>
+        <a href="/like-answer/{{answer.id}}" class="btn btn-dark btn-sm ">Like</a>
+        <a href="/dislike-answer/{{answer.id}}" class="btn btn-dark btn-sm ">Dislike</a>
+        <div class="mt-2">
+{#            <a href="/delete-answer/{{answer.id}}" class="btn btn-danger btn-sm float-right">Delete</a>#}
+{#            <div>#}
+{#                <a href="/like-answer/{{answer.id}}" id="like"> <i class="fa fa-heart"></i>#}
+{#                    {{answer.likes|length}}</a>#}
+{#            </div>#}
+        </div>
+        <hr>
+        {% endfor %}
+    </div>
+    <div class="container">
+        <form action="/respond-question/{{q_id}}" method="POST">
+            <div class="form-group">
+                <label for="message">Your answer</label>
+                <textarea class="form-control" id="message" rows="6" name="message" required></textarea>
+            </div>
+            <br>
+            <button class="btn btn-dark btn-sm" type="submit">Submit your answer</button>
+        </form>
+    </div>
+</div>
+{% endblock  %}
